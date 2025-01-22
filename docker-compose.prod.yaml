@@ -6,7 +6,6 @@ services:
     restart: always
     depends_on:
       - redis
-      - postgres
     ports:
       - 8080:8080
     volumes:
@@ -29,22 +28,6 @@ services:
       - evolution_redis:/data
     ports:
       - 6380:6379
-
-  postgres:
-    container_name: postgres
-    image: postgres:15
-    networks:
-      - evolution-net
-    command: [ "postgres", "-c", "max_connections=1000" ]
-    restart: always
-    ports:
-      - 5433:5432
-    environment:
-      - POSTGRES_PASSWORD=kajsdnfjknsadkfjnkasd154asd
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    expose:
-      - 5432
 
 volumes:
   evolution_instances:
